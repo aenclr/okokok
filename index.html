@@ -28,29 +28,47 @@
       const strawberry = document.querySelector('#strawberry');
 
       document.addEventListener('mousemove', (e) => {
-        const x = e.clientX;
-        const y = e.clientY;
-        const frogX = parseInt(frog.style.left);
-        const frogY = parseInt(frog.style.top);
+  const x = e.clientX;
+  const y = e.clientY;
+  const frogX = parseInt(frog.style.left);
+  const frogY = parseInt(frog.style.top);
 
-        const dx = x - frogX;
-        const dy = y - frogY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const speed = dist / 10;
+  const dx = x - frogX;
+  const dy = y - frogY;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  const speed = dist / 10;
 
-        const angle = Math.atan2(dy, dx);
-        const vx = speed * Math.cos(angle);
-        const vy = speed * Math.sin(angle);
+  const angle = Math.atan2(dy, dx);
+  const vx = speed * Math.cos(angle);
+  const vy = speed * Math.sin(angle);
 
-        const newFrogX = frogX + vx;
-        const newFrogY = frogY + vy;
+  const newFrogX = frogX + vx;
+  const newFrogY = frogY + vy;
 
-        frog.style.left = newFrogX + 'px';
-        frog.style.top = newFrogY + 'px';
+  frog.style.left = newFrogX + 'px';
+  frog.style.top = newFrogY + 'px';
 
-        strawberry.style.left = x - strawberry.offsetWidth / 2 + 'px';
-        strawberry.style.top = y - strawberry.offsetHeight / 2 + 'px';
-      });
+  const strawX = x - strawberry.offsetWidth / 2;
+  const strawY = y - strawberry.offsetHeight / 2;
+
+  strawberry.style.left = strawX + 'px';
+  strawberry.style.top = strawY + 'px';
+
+  const strawDx = strawX - frogX;
+  const strawDy = strawY - frogY;
+  const strawDist = Math.sqrt(strawDx * strawDx + strawDy * strawDy);
+  const strawSpeed = strawDist / 10;
+
+  const strawAngle = Math.atan2(strawDy, strawDx);
+  const strawVx = strawSpeed * Math.cos(strawAngle);
+  const strawVy = strawSpeed * Math.sin(strawAngle);
+
+  const newFrogX2 = frogX + strawVx;
+  const newFrogY2 = frogY + strawVy;
+
+  frog.style.left = newFrogX2 + 'px';
+  frog.style.top = newFrogY2 + 'px';
+});
     </script>
   </body>
 </html>
