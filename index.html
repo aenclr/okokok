@@ -4,10 +4,7 @@
     <title>Pixel Frog Chases Strawberry</title>
     <style>
       #frog {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: relative;
         height: 50px;
         width: 50px;
         background-image: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE5YmE0NWQ5NzNkZDU5ODExNDEyZGM2YjUwZmJkNzZiYjRlMjc5OCZjdD1z/Ke2X2JvXLIrIycWppL/giphy.gif');
@@ -33,21 +30,8 @@
       document.addEventListener('mousemove', (e) => {
         const x = e.clientX;
         const y = e.clientY;
-        strawberry.style.left = x + 'px';
-        strawberry.style.top = y + 'px';
-      });
-
-      function chaseCursor() {
-        const x = parseInt(strawberry.style.left);
-        const y = parseInt(strawberry.style.top);
         const frogX = parseInt(frog.style.left);
         const frogY = parseInt(frog.style.top);
-
-        if (Math.abs(x - frogX) < 5 && Math.abs(y - frogY) < 5) {
-          // strawberry caught!
-          alert('You caught the strawberry!');
-          return;
-        }
 
         const dx = x - frogX;
         const dy = y - frogY;
@@ -63,11 +47,7 @@
 
         frog.style.left = newFrogX + 'px';
         frog.style.top = newFrogY + 'px';
-
-        requestAnimationFrame(chaseCursor);
-      }
-
-      chaseCursor();
+      });
     </script>
   </body>
 </html>
