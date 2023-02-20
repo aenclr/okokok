@@ -17,6 +17,9 @@
         background-image: url('https://thumbs.dreamstime.com/b/strawberry-pixel-art-bit-red-berry-pixelated-231715515.jpg');
         background-size: contain;
         cursor: none;
+        /* add these styles */
+        top: 0;
+        left: 0;
       }
     </style>
   </head>
@@ -47,6 +50,21 @@
 
         frog.style.left = newFrogX + 'px';
         frog.style.top = newFrogY + 'px';
+
+        // update strawberry position
+        const strawX = parseInt(strawberry.style.left);
+        const strawY = parseInt(strawberry.style.top);
+        const strawDx = x - strawX;
+        const strawDy = y - strawY;
+        const strawDist = Math.sqrt(strawDx * strawDx + strawDy * strawDy);
+        const strawSpeed = strawDist / 20;
+        const strawAngle = Math.atan2(strawDy, strawDx);
+        const strawVx = strawSpeed * Math.cos(strawAngle);
+        const strawVy = strawSpeed * Math.sin(strawAngle);
+        const newStrawX = strawX + strawVx;
+        const newStrawY = strawY + strawVy;
+        strawberry.style.left = newStrawX + 'px';
+        strawberry.style.top = newStrawY + 'px';
       });
     </script>
   </body>
