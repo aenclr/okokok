@@ -17,9 +17,6 @@
         background-image: url('https://thumbs.dreamstime.com/b/strawberry-pixel-art-bit-red-berry-pixelated-231715515.jpg');
         background-size: contain;
         cursor: none;
-        /* add these styles */
-        top: 0;
-        left: 0;
       }
     </style>
   </head>
@@ -31,13 +28,30 @@
       const strawberry = document.querySelector('#strawberry');
 
       document.addEventListener('mousemove', (e) => {
-        const x = e.clientX;
-        const y = e.clientY;
+        const strawX = e.clientX - (strawberry.offsetWidth / 2);
+        const strawY = e.clientY - (strawberry.offsetHeight / 2);
+
+        const strawDx = strawX - parseInt(strawberry.style.left);
+        const strawDy = strawY - parseInt(strawberry.style.top);
+        const strawDist = Math.sqrt(strawDx * strawDx + strawDy * strawDy);
+
+        const strawAngle = Math.atan2(strawDy, strawDx);
+        const strawSpeed = strawDist / 10;
+
+        const strawVx = strawSpeed * Math.cos(strawAngle);
+        const strawVy = strawSpeed * Math.sin(strawAngle);
+
+        const newStrawX = parseInt(strawberry.style.left) + strawVx;
+        const newStrawY = parseInt(strawberry.style.top) + strawVy;
+
+        strawberry.style.left = newStrawX + 'px';
+        strawberry.style.top = newStrawY + 'px';
+
         const frogX = parseInt(frog.style.left);
         const frogY = parseInt(frog.style.top);
 
-        const dx = x - frogX;
-        const dy = y - frogY;
+        const dx = newStrawX - frogX;
+        const dy = newStrawY - frogY;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const speed = dist / 10;
 
@@ -50,21 +64,6 @@
 
         frog.style.left = newFrogX + 'px';
         frog.style.top = newFrogY + 'px';
-
-        // update strawberry position
-        const strawX = parseInt(strawberry.style.left);
-        const strawY = parseInt(strawberry.style.top);
-        const strawDx = x - strawX;
-        const strawDy = y - strawY;
-        const strawDist = Math.sqrt(strawDx * strawDx + strawDy * strawDy);
-        const strawSpeed = strawDist / 20;
-        const strawAngle = Math.atan2(strawDy, strawDx);
-        const strawVx = strawSpeed * Math.cos(strawAngle);
-        const strawVy = strawSpeed * Math.sin(strawAngle);
-        const newStrawX = strawX + strawVx;
-        const newStrawY = strawY + strawVy;
-        strawberry.style.left = newStrawX + 'px';
-        strawberry.style.top = newStrawY + 'px';
       });
     </script>
   </body>
