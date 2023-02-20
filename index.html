@@ -28,30 +28,13 @@
       const strawberry = document.querySelector('#strawberry');
 
       document.addEventListener('mousemove', (e) => {
-        const strawX = e.clientX - (strawberry.offsetWidth / 2);
-        const strawY = e.clientY - (strawberry.offsetHeight / 2);
-
-        const strawDx = strawX - parseInt(strawberry.style.left);
-        const strawDy = strawY - parseInt(strawberry.style.top);
-        const strawDist = Math.sqrt(strawDx * strawDx + strawDy * strawDy);
-
-        const strawAngle = Math.atan2(strawDy, strawDx);
-        const strawSpeed = strawDist / 10;
-
-        const strawVx = strawSpeed * Math.cos(strawAngle);
-        const strawVy = strawSpeed * Math.sin(strawAngle);
-
-        const newStrawX = parseInt(strawberry.style.left) + strawVx;
-        const newStrawY = parseInt(strawberry.style.top) + strawVy;
-
-        strawberry.style.left = newStrawX + 'px';
-        strawberry.style.top = newStrawY + 'px';
-
+        const x = e.clientX;
+        const y = e.clientY;
         const frogX = parseInt(frog.style.left);
         const frogY = parseInt(frog.style.top);
 
-        const dx = newStrawX - frogX;
-        const dy = newStrawY - frogY;
+        const dx = x - frogX;
+        const dy = y - frogY;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const speed = dist / 10;
 
@@ -64,6 +47,9 @@
 
         frog.style.left = newFrogX + 'px';
         frog.style.top = newFrogY + 'px';
+
+        strawberry.style.left = x - strawberry.offsetWidth / 2 + 'px';
+        strawberry.style.top = y - strawberry.offsetHeight / 2 + 'px';
       });
     </script>
   </body>
