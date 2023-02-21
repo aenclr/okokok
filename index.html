@@ -30,8 +30,9 @@
       document.addEventListener('mousemove', (e) => {
         const x = e.clientX;
         const y = e.clientY;
-        const frogX = parseInt(frog.style.left) || 0;
-        const frogY = parseInt(frog.style.top) || 0;
+        const strawDx = x - (parseInt(strawberry.style.left) || 0);
+const strawDy = y - (parseInt(strawberry.style.top) || 0);
+
         const strawX = x;
         const strawY = y;
 
@@ -57,7 +58,6 @@
         const strawVy = speed * Math.sin(strawAngle);
         const newStrawX = strawX + strawVx;
         const newStrawY = strawY + strawVy;
-
         strawberry.style.left = newStrawX + 'px';
         strawberry.style.top = newStrawY + 'px';
       });
