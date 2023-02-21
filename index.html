@@ -16,7 +16,6 @@
         width: 30px;
         background-image: url('https://thumbs.dreamstime.com/b/strawberry-pixel-art-bit-red-berry-pixelated-231715515.jpg');
         background-size: contain;
-        cursor: none;
       }
     </style>
   </head>
@@ -24,51 +23,47 @@
     <div id="frog"></div>
     <div id="strawberry"></div>
     <script>
-      const frog = document.querySelector('#frog');
-      const strawberry = document.querySelector('#strawberry');
+      // Select the frog and strawberry elements from the HTML
+      var frog = document.getElementById('frog');
+      var strawberry = document.getElementById('strawberry');
 
-      document.addEventListener('mousemove', (e) => {
-  const x = e.clientX;
-  const y = e.clientY;
-  const frogX = parseInt(frog.style.left);
-  const frogY = parseInt(frog.style.top);
+      // Set the initial position of the strawberry to the center of the screen
+      strawberry.style.left = (window.innerWidth / 2) + 'px';
+      strawberry.style.top = (window.innerHeight / 2) + 'px';
 
-  const dx = x - frogX;
-  const dy = y - frogY;
-  const dist = Math.sqrt(dx * dx + dy * dy);
-  const speed = dist / 10;
+      // Move the frog and strawberry elements when the mouse moves
+      document.addEventListener('mousemove', function(event) {
+        // Get the position of the mouse
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
 
-  const angle = Math.atan2(dy, dx);
-  const vx = speed * Math.cos(angle);
-  const vy = speed * Math.sin(angle);
+        // Get the position of the frog and strawberry
+        var frogX = parseInt(frog.style.left);
+        var frogY = parseInt(frog.style.top);
+        var strawberryX = parseInt(strawberry.style.left);
+        var strawberryY = parseInt(strawberry.style.top);
 
-  const newFrogX = frogX + vx;
-  const newFrogY = frogY + vy;
+        // Calculate the distance between the frog and strawberry
+        var dx = strawberryX - frogX;
+        var dy = strawberryY - frogY;
+        var distance = Math.sqrt(dx * dx + dy * dy);
 
-  frog.style.left = newFrogX + 'px';
-  frog.style.top = newFrogY + 'px';
+        // If the distance is greater than 5, move the frog towards the strawberry
+        if (distance > 5) {
+          // Calculate the angle between the frog and strawberry
+          var angle = Math.atan2(dy, dx);
 
-  const strawX = x - strawberry.offsetWidth / 2;
-  const strawY = y - strawberry.offsetHeight / 2;
+          // Calculate the velocity of the frog
+          var vx = Math.cos(angle) * 5;
+          var vy = Math.sin(angle) * 5;
 
-  strawberry.style.left = strawX + 'px';
-  strawberry.style.top = strawY + 'px';
-
-  const strawDx = strawX - frogX;
-  const strawDy = strawY - frogY;
-  const strawDist = Math.sqrt(strawDx * strawDx + strawDy * strawDy);
-  const strawSpeed = strawDist / 10;
-
-  const strawAngle = Math.atan2(strawDy, strawDx);
-  const strawVx = strawSpeed * Math.cos(strawAngle);
-  const strawVy = strawSpeed * Math.sin(strawAngle);
-
-  const newFrogX2 = frogX + strawVx;
-  const newFrogY2 = frogY + strawVy;
-
-  frog.style.left = newFrogX2 + 'px';
-  frog.style.top = newFrogY2 + 'px';
-});
+          // Move the frog and strawberry based on their velocity
+          frog.style.left = (frogX + vx) + 'px';
+          frog.style.top = (frogY + vy) + 'px';
+          strawberry.style.left = mouseX + 'px';
+          strawberry.style.top = mouseY + 'px';
+        }
+      });
     </script>
   </body>
 </html>
